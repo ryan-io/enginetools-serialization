@@ -1,0 +1,15 @@
+{
+  "name": "com.engine.tools.serialization",
+  "displayName": "Engine Tools - Serialization",
+  "description": "For serializing & deserializing data in other tools. This is used heavily in the editor.",
+  "version": "1.0.0",
+  "unity": "2021.3",
+  "unityRelease": "1f1",
+  "type": "tool",
+  "dependencies": {
+  },
+  "repository": {
+    "url": "https://github.com/ryanunitydeveloper/enginetools-serialization.git",
+    "type": "git"
+  }
+}
