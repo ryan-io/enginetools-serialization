@@ -6,6 +6,11 @@
   "unity": "2021.3",
   "unityRelease": "1f1",
   "type": "tool",
+  "author": {
+    "name": "Ryan IO",
+    "email": "ryan@ryandeveloper.io",
+    "url": "ryandeveloper.io"
+  },
   "dependencies": {
   },
   "repository": {
