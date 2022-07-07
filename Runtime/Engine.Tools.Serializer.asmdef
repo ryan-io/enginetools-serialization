@@ -2,7 +2,8 @@
     "name": "Engine.Tools.Serializer",
     "rootNamespace": "Engine.Tools.Serializer",
     "references": [
-        "GUID:2d39bd8f148216f40b56152f5062a91b"
+        "GUID:2d39bd8f148216f40b56152f5062a91b",
+        "GUID:efa45043feb7e4147a305b73b5cea642"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
