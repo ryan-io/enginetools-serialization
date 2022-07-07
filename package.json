@@ -1,5 +1,5 @@
 {
-  "name": "com.engine.tools.serialization",
+  "name": "com.omniengine.tools.serialization",
   "displayName": "Engine Tools - Serialization",
   "description": "For serializing & deserializing data in other tools. This is used heavily in the editor.",
   "version": "1.0.0",
