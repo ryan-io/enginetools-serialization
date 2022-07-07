@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -32,7 +33,8 @@ namespace Engine.Tools.Serializer {
 
 		public static readonly string DefaultDirectory = Application.dataPath + "/" + DefaultFolder + "/";
 
-		public const string DefaultFolder = "SerializedData";
+		public const string DefaultFolder = "MyData";
+		public const string DefaultRoot   = "SerializedData";
 
 		public static string GetJsonString(Object obj) {
 			return JsonUtility.ToJson(obj);
@@ -70,15 +72,34 @@ namespace Engine.Tools.Serializer {
 			return true;
 		}
 
-		public static void EnsureDirectoryExists(string folderName) {
+		public static void EnsureDirectoryExists(string folderName, string rootFolder) {
+			if (!Directory.Exists(rootFolder)) {
+				Debug.Log($"Could not find the default directory {rootFolder}. Now creating...");
+				Directory.CreateDirectory(rootFolder);
+			}
+
 			if (!Directory.Exists(folderName))
 				Directory.CreateDirectory(folderName);
-
-			if (!Directory.Exists(DefaultDirectory)) {
-				Debug.Log($"Could not find the default directory ({DefaultDirectory}. Now creating...");
-				Directory.CreateDirectory(DefaultDirectory);
-			}
 		}
+
+		public static void EnsureFileExists(string path, string name, string format) {
+			if (string.IsNullOrWhiteSpace(path) || string.IsNullOrWhiteSpace(name) ||
+			    string.IsNullOrWhiteSpace(format)) {
+				Debug.LogWarning("String passed to EnsureFileExists was null.");
+				return;
+			}
+
+			var fullPath = path + "/" + name + format;
+			var exists   = File.Exists(fullPath);
+
+			if (!exists) {
+				using var fs = File.Create(fullPath);
+				fs.Flush();
+			}
+
+			Debug.Log($"Check fil at : {fullPath} - {exists}");
+		}
+
 
 		public static string InternalSanitizeName(string value) {
 			var sanitizedString = Sanitizer.Sanitize(value);

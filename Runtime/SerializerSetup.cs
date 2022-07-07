@@ -1,7 +1,6 @@
 ﻿using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using TextAsset = UnityEngine.TextCore.Text.TextAsset;
 
 namespace Engine.Tools.Serializer {
 	/// <summary>
@@ -16,27 +15,36 @@ namespace Engine.Tools.Serializer {
 		/// All strings will be sanitized.
 		/// This is NOT encrypted as of 17 March, 2022.
 		/// </summary>
+		///
+		/// 
 
+		public string SaveRoot {
+			get {
+				Serializer.EnsureDirectoryExists(AppPathRoot, _config.SaveFolderRoot);
+				return AppPathRoot;
+			}
+		}
+		
 		public string SaveLocation {
 			get {
-				Serializer.EnsureDirectoryExists(AppPath);
-
-				if (string.IsNullOrWhiteSpace(_config.SaveFolder))
-					_config.SaveFolder = Serializer.DefaultFolder;
-
+				Serializer.EnsureDirectoryExists(AppPath, _config.SaveFolderRoot);
 				return AppPath;
 			}
 		}
 
-		public string FileFormat => _config.SaveFormat;
-
 		void OnValidate() {
+			if (string.IsNullOrWhiteSpace(_config.SaveFolderRoot))
+				_config.SaveFolderRoot = Serializer.DefaultRoot;
 			
+			if (string.IsNullOrWhiteSpace(_config.SaveFolder))
+				_config.SaveFolder = Serializer.DefaultFolder;
 		}
 
-		bool HasNoConfigData => !_config.SerializedData;
+		public string FileFormat => _config.SaveFormat;
+
+		string AppPath => AppPathRoot + $"{_config.SaveFolder}/";
 		
-		string AppPath => Application.dataPath + $"/{_config.SaveFolder}/";
+		string AppPathRoot => Application.dataPath + "/" + _config.SaveFolderRoot +"/";
 
 		[SerializeField, HideLabel] SerializeConfiguration _config;
 		string                                             _saveFolderNameSanitized;
