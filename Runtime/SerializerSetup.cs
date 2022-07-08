@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -33,6 +34,9 @@ namespace Engine.Tools.Serializer {
 		}
 
 		void OnValidate() {
+			if (_config == null || Application.isPlaying)
+				return;
+			
 			if (string.IsNullOrWhiteSpace(_config.SaveFolderRoot))
 				_config.SaveFolderRoot = Serializer.DefaultRoot;
 			

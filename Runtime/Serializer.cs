@@ -89,7 +89,7 @@ namespace Engine.Tools.Serializer {
 				return;
 			}
 
-			var fullPath = path + "/" + name + format;
+			var fullPath = path + name + format;
 			var exists   = File.Exists(fullPath);
 
 			if (!exists) {
