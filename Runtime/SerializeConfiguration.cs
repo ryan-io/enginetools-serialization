@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using TextAsset = UnityEngine.TextCore.Text.TextAsset;
 
-namespace Engine.Tools.Serializer {
-	[Serializable, Title("Serialization Configuration")]
+namespace UnityBCL.Serialization {
+#if UNITY_EDITOR || UNITY_STANDALONE
+	[Title("Serialization Configuration")]
+#endif
+	[Serializable]
 	public class SerializeConfiguration {
-		[Title("Folder Setup")]
-		[field: SerializeField, InfoBox(SaveRootInfo)]
-		public string SaveFolderRoot { get; set; } = "SerializedData";
+		const string SERIALIZED_DATA_INFO =
+			"Verify the seed value in the 'SerializedData' file name match with the Mapsolver seed.";
 
-		[field: SerializeField, InfoBox("Where serialized data is saved")]
-		public string SaveFolder { get; set; } = "MyData";
-
-		[field: SerializeField, ValueDropdown("GetFormats")]
-		public string SaveFormat { get; private set; } = ".txt";
+		const string SAVE_ROOT_INFO =
+			"This folder is nested under 'SaveFolderRoot'. Any data saved will be in 'SaveFolder/Root/SaveFolder/your-file'";
 
 		public static readonly string DefaultGameObjectName = "AppPathsDefinitions";
 
@@ -29,21 +26,34 @@ namespace Engine.Tools.Serializer {
 		public static readonly string NoDirectoryFound =
 			"Directory does not exist. The codebase needs to be debugged. There are fallbacks to create the directory if it cannot be found.";
 
+#if UNITY_EDITOR || UNITY_STANDALONE
+		[Title("Folder Setup")]
+		[field: InfoBox(SAVE_ROOT_INFO)]
+#endif
+		[field: SerializeField]
+		public string SaveFolderRoot { get; set; } = "SerializedData";
+
+#if UNITY_EDITOR || UNITY_STANDALONE
+		[field: InfoBox("Where serialized data is saved")]
+#endif
+		[field: SerializeField]
+		public string SaveFolder { get; set; } = "MyData";
+
+#if UNITY_EDITOR || UNITY_STANDALONE
+		[field: ValueDropdown("GetFormats")]
+#endif
+		[field: SerializeField]
+		public string SaveFormat { get; private set; } = ".txt";
+
 		static IEnumerable GetFormats() {
 			var formats = new HashSet<string> {
 				".txt",
 				".json",
 				".bytes",
-				".omni"
+				".prefab"
 			};
 
 			return formats;
 		}
-
-		const string SerializedDataInfo =
-			"Verify the seed value in the 'SerializedData' file name match with the Mapsolver seed.";
-
-		const string SaveRootInfo =
-			"This folder is nested under 'SaveFolderRoot'. Any data saved will be in 'SaveFolder/Root/SaveFolder/your-file'";
 	}
 }

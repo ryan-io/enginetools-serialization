@@ -1,44 +1,14 @@
 ﻿using System.IO;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
-namespace Engine.Tools.Serializer {
+namespace UnityBCL.Serialization {
 	public static class Serializer {
-		public readonly struct JsonJob {
-			public SerializerSetup Setup      { get; }
-			public string          SaveName   { get; }
-			public string          JsonString { get; }
-
-			public JsonJob(SerializerSetup setup, string saveName, string jsonString) {
-				Setup      = setup;
-				SaveName   = saveName;
-				JsonString = jsonString;
-			}
-		}
-
-		public readonly struct TxtJob {
-			public SerializerSetup Setup      { get; }
-			public string          SaveName   { get; }
-			public byte[]          Data       { get; }
-			public string          FileFormat { get; }
-
-			public TxtJob(SerializerSetup setup, string saveName, byte[] data, string fileFormat) {
-				Setup      = setup;
-				SaveName   = saveName;
-				Data       = data;
-				FileFormat = fileFormat;
-			}
-		}
-
-		public static readonly string DefaultDirectory = Application.dataPath + "/" + DefaultFolder + "/";
-
 		public const string DefaultFolder = "MyData";
 		public const string DefaultRoot   = "SerializedData";
 
-		public static string GetJsonString(Object obj) {
-			return JsonUtility.ToJson(obj);
-		}
+		public static readonly string DefaultDirectory = Application.dataPath + "/" + DefaultFolder + "/";
+
+		public static string GetJsonString(Object obj) => JsonUtility.ToJson(obj);
 
 		public static void SaveJson(JsonJob job, bool sanitizeName = true) {
 			var name = job.SaveName;
@@ -59,7 +29,7 @@ namespace Engine.Tools.Serializer {
 			File.WriteAllBytes(location, job.Data);
 		}
 
-		public static bool TryLoadBytesData(string filePathFull, out byte[] data) {
+		public static bool TryLoadBytesData(string filePathFull, out byte[]? data) {
 			var exists = File.Exists(filePathFull);
 
 			if (!exists) {
@@ -104,6 +74,32 @@ namespace Engine.Tools.Serializer {
 		public static string InternalSanitizeName(string value) {
 			var sanitizedString = Sanitizer.Sanitize(value);
 			return sanitizedString == string.Empty ? "stringWasEmpty" : sanitizedString;
+		}
+
+		public readonly struct JsonJob {
+			public SerializerSetup Setup      { get; }
+			public string          SaveName   { get; }
+			public string          JsonString { get; }
+
+			public JsonJob(SerializerSetup setup, string saveName, string jsonString) {
+				Setup      = setup;
+				SaveName   = saveName;
+				JsonString = jsonString;
+			}
+		}
+
+		public readonly struct TxtJob {
+			public SerializerSetup Setup      { get; }
+			public string          SaveName   { get; }
+			public byte[]          Data       { get; }
+			public string          FileFormat { get; }
+
+			public TxtJob(SerializerSetup setup, string saveName, byte[] data, string fileFormat) {
+				Setup      = setup;
+				SaveName   = saveName;
+				Data       = data;
+				FileFormat = fileFormat;
+			}
 		}
 	}
 }

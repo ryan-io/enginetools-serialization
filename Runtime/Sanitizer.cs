@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace Engine.Tools.Serializer {
+namespace UnityBCL.Serialization {
 	public static class Sanitizer {
 		const string RegexPattern   = @"[^\w\.@-]";
 		const float  DefaultTimeout = 1.0f;
 
 		/// <summary>
-		/// If the regex process times out or is null/empty, Sanitize will return string.empty.
-		/// This is intended to be used as a comparison. Each sanitized string should check against string.empty.
+		///     If the regex process times out or is null/empty, Sanitize will return string.empty.
+		///     This is intended to be used as a comparison. Each sanitized string should check against string.empty.
 		/// </summary>
 		/// <param name="value"></param>
 		/// <returns></returns>
