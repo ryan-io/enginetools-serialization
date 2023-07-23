@@ -2,7 +2,7 @@
 using BCL;
 using UnityEngine;
 
-namespace UnityBCL.Serialization {
+namespace Standalone.Serialization {
 	public class GenericSaver : ISave {
 		public void Save(Object obj, string fileName, bool overWrite = false) {
 			if (GuardAgainstNullObject(obj)) {

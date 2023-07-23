@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace UnityBCL.Serialization {
+namespace Standalone.Serialization {
 #if UNITY_EDITOR || UNITY_STANDALONE
 	[Title("Serialization Configuration")]
 #endif

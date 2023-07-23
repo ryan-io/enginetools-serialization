@@ -1,7 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace UnityBCL.Serialization {
+namespace Standalone.Serialization {
 	/// <summary>
 	///     The 'brain' of saving & loading persistent data within the Engine environment.
 	/// </summary>
