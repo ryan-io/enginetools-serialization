@@ -31,6 +31,9 @@ namespace Standalone.Serialization {
 				return AppPath;
 			}
 		}
+		
+		public string SaveRootNameRaw   => _config.SaveFolderRoot;
+		public string SaveFolderNameRaw => _config.SaveFolder;
 
 		public string FileFormat => _config.SaveFormat;
 
