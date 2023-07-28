@@ -1,12 +1,12 @@
 ﻿using System.IO;
 using UnityEngine;
 
-namespace Standalone.Serialization {
+namespace UnityBCL.Serialization {
 	public static class Serializer {
-		public const string DefaultFolder = "MyData";
-		public const string DefaultRoot   = "SerializedData";
+		public const string DEFAULT_FOLDER = "MyData";
+		public const string DEFAULT_ROOT   = "SerializedData";
 
-		public static readonly string DefaultDirectory = Application.dataPath + "/" + DefaultFolder + "/";
+		public static readonly string DefaultDirectory = Application.dataPath + "/" + DEFAULT_FOLDER + "/";
 
 		public static string GetJsonString(Object obj) => JsonUtility.ToJson(obj);
 
@@ -15,7 +15,7 @@ namespace Standalone.Serialization {
 			if (sanitizeName)
 				name = InternalSanitizeName(job.SaveName);
 
-			Debug.Log($"Saving to: {job.Setup.SaveLocation + name}");
+			Debug.Log($"Saving to: {job.Setup.SaveLocation + name + JSON_FILE}");
 
 			File.WriteAllText(job.Setup.SaveLocation + name, job.JsonString);
 		}
@@ -101,5 +101,7 @@ namespace Standalone.Serialization {
 				FileFormat = fileFormat;
 			}
 		}
+
+		const string JSON_FILE = ".json";
 	}
 }
