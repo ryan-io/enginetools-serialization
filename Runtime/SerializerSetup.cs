@@ -46,10 +46,10 @@ namespace Standalone.Serialization {
 				return;
 
 			if (string.IsNullOrWhiteSpace(_config.SaveFolderRoot))
-				_config.SaveFolderRoot = Serializer.DefaultRoot;
+				_config.SaveFolderRoot = Serializer.DEFAULT_ROOT;
 
 			if (string.IsNullOrWhiteSpace(_config.SaveFolder))
-				_config.SaveFolder = Serializer.DefaultFolder;
+				_config.SaveFolder = Serializer.DEFAULT_ROOT;
 		}
 	}
 }
