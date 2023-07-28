@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using UnityEngine;
 
-namespace UnityBCL.Serialization {
+namespace Standalone.Serialization {
 	public static class Serializer {
 		public const string DEFAULT_FOLDER = "MyData";
 		public const string DEFAULT_ROOT   = "SerializedData";
